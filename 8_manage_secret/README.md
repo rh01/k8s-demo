@@ -12,9 +12,7 @@ username=$(echo -n "admin" | base64)
 password=$(echo -n "chjkk@#hjkk" | base64)
 ```
 
-Secret对象是使用yaml定义的。
-下我们将使用上面定义的变量，并为它们提供友好的标签，
-供我们的应用程序使用。这将创建可以通过名称（在本例中为test-secret）访问的键/值密钥对的集合。
+可以通过yaml文件来定义secret对象，并将`username`和`password` 作为数据存储在secret中。
 ```bash
 cat  <<EOF >> secret.yaml
 apiVersion: v1
@@ -28,15 +26,19 @@ data:
 EOF
 ```
 
-使用kubectl创建我们的秘密。
+使用下面命令可以创建一个secret对象。
 
 ```bash
 kubectl create -f secret.yaml
 ```
 
-以下命令允许您查看定义的所有秘密集合。
+使用下面命令可以查看定义的所有secrets集合。
 ```
 kubectl get secrets
 ```
 
-我们将通过Pod使用这些机密。
+### 通过环境变量来引用secret对象
+
+
+### 将secret对象持久化到卷中并使用pod来引用
+
