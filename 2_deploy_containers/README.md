@@ -13,7 +13,9 @@ It also assumes you've set up your system to use minikube.
 # 另一种，也可以直接在minikube start之后添加no_proxy
 export no_proxy=$no_proxy,$(minikube ip)
 export NO_PROXY=$no_proxy,$(minikube ip)
-minikube start --image-repository registry.aliyuncs.com/google_containers ----docker-env HTTP_PROXY=http://YOURPROXY:PORT  --docker-env HTTPS_PROXY=https://YOURPROXY:PORT
+minikube start --image-repository registry.aliyuncs.com/google_containers \
+  --docker-env HTTP_PROXY=http://YOURPROXY:PORT \
+  --docker-env HTTPS_PROXY=https://YOURPROXY:PORT
 ```
 
 切换到当前minikube上下文环境中。
