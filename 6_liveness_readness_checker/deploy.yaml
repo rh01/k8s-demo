@@ -1,0 +1,66 @@
+kind: List
+apiVersion: v1
+items:
+- kind: ReplicationController
+  apiVersion: v1
+  metadata:
+    name: frontend
+    labels:
+      name: frontend
+  spec:
+    replicas: 1
+    selector:
+      name: frontend
+    template:
+      metadata:
+        labels:
+          name:  frontend
+      spec:
+        containers:
+          - name:  frontend
+            image:  katacoda/docker-http-server:health 
+            livenessProbe:
+              httpGet:
+                path: /
+                port: 80
+              initialDelaySeconds: 1
+              timeoutSeconds: 1
+            livenessProbe:
+              httpGet:
+                path: /
+                port: 80
+              initialDelaySeconds: 1
+              timeoutSeconds: 1
+- apiVersion: v1
+  kind: ReplicationController
+  metadata:
+    name: back-frontend
+    labels:
+      name: bad-frontend
+  spec:
+    replicas: 1
+    selector:
+      name: bad-frontend
+    template:
+      metadata:
+        labels:
+          name: bad-frontend
+      spec:
+       containers:
+          - name:  bad-frontend
+            image:  katacoda/docker-http-server:unhealthy
+            livenessProbe:
+              httpGet:
+                path: /
+                port: 80
+              initialDelaySeconds: 1
+              timeoutSeconds: 1
+            livenessProbe:
+              httpGet:
+                path: /
+                port: 80
+              initialDelaySeconds: 1
+              timeoutSeconds: 1
+            
+
+
